@@ -9,6 +9,10 @@ func routes(_ app: Application) throws {
     app.get("hello") { req -> String in
         return "Hello, world!"
     }
+    
+    app.get("by") { req -> String in
+        return "by, world!"
+    }
    
     let controller = AuthController()
     app.post("register", use: controller.register)
