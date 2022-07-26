@@ -8,19 +8,19 @@
 import Vapor
 
 class ItemsController {
-    func getCatalog(_ req: Request) throws -> EventLoopFuture<[CatalogResponse]> {
+    func getCatalog(_ req: Request) throws -> EventLoopFuture<CatalogResponse> {
         guard let body = try? req.content.decode(Catalog.self) else { throw Abort(.badRequest) }
         
         print(body)
         
-        let response = [CatalogResponse(page_number: 1,
+        let response = CatalogResponse(page_number: 1,
                                         products: [
                                             CatalogContent(id_product: 123, product_name: "Эппл тряпочка", price: 1990, shortDescription: "Тряпочка Эппл протирать всякое.", picUrl: "https://i.imgur.com/WzgFAPe.jpg"),
                                             CatalogContent(id_product: 124, product_name: "Магическая эппл-мыш", price: 7900, shortDescription: "Мыш Мэджик Маус Эппл магическая.", picUrl: "https://i.imgur.com/zc2ksyh.jpg"),
                                             CatalogContent(id_product: 125, product_name: "Наушники эйрподы про", price: 24990, shortDescription: "Стильные, модные, молодежные наушники эппл.", picUrl: "https://i.imgur.com/F0ZHN9T.jpg"),
                                             CatalogContent(id_product: 126, product_name: "Часы эппл воч найк", price: 36690, shortDescription: "Модные спортивные часы. Пойдет в качестве отличного подарка.", picUrl: "https://i.imgur.com/SXvBkqN.jpg"),
                                             CatalogContent(id_product: 127, product_name: "Хомпод мини оранжевое", price: 13990, shortDescription: "Колонка от Эппл. Звук — отличный.", picUrl: "https://i.imgur.com/FCxpUDN.jpg")
-                                        ])]
+                                        ])
         
         
         return req.eventLoop.future(response)
